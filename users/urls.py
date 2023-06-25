@@ -12,4 +12,5 @@ urlpatterns = [
     path("signin/", LoginView.as_view(template_name="users/signin.html", authentication_form=LoginForm,
                                       redirect_authenticated_user=True), name="login"),
     path("logout/", LogoutView.as_view(template_name="users/logout.html"), name="logout"),
+    path("addinfo/", RegisterView.as_view(template_name="users/addinfo.html"), name="addinfo"),
 ]

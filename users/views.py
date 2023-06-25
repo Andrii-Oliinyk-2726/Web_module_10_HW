@@ -9,6 +9,12 @@ class RegisterView(View):
     form_class = RegisterForm
     template_name = 'users/signup.html'
 
+    # Деактивує можливість заходу на сторінку реєстрації після успішної аутентикації
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(to="quotes:root")
+        return super(RegisterView, self).dispatch(request, *args, **kwargs)
+
     def get(self, request):
         return render(request, self.template_name, {"form": self.form_class})
 
@@ -22,3 +28,6 @@ class RegisterView(View):
             return redirect(to="users:login")
 
         return render(request, self.template_name, {"form": form})
+
+
+
